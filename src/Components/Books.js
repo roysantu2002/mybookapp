@@ -1,24 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-export default class Reading extends Component {
-
+export default class Books extends Component {
     static propTypes = {
-        currentlyReading: PropTypes.array.isRequired,
+        header: PropTypes.string.isRequired,
+        wantToRead: PropTypes.array.isRequired,
         onAdd: PropTypes.func.isRequired,
       }
-
     render() {
-
-        const { currentlyReading, onAdd} = this.props
-        // {console.log(currentlyReading)}
-
+        const {header, wantToRead, onAdd} = this.props
         return (
             <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
+              <h2 className="bookshelf-title">{header}</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                {currentlyReading.map((book) => (
+                {wantToRead.map((book) => (
                   <li key={book.id}>
                     <div className="book">
                       <div className="book-top">
@@ -43,5 +39,4 @@ export default class Reading extends Component {
             </div>
     )
     }
-}
-
+    }
