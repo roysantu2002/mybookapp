@@ -10,7 +10,10 @@ import SearchBook from "./SearchBook";
 
 class BooksApp extends React.Component {
   state = {
+
     allBooks: [],
+    reading:[],
+    wantToRead:[],
     currentlyReading: [
       {
         id: 1,
@@ -22,6 +25,7 @@ class BooksApp extends React.Component {
       },
     ],
     read:[],
+    readtest:[]
     //screen: 'list'
   };
 
@@ -30,9 +34,43 @@ class BooksApp extends React.Component {
       this.setState(() => ({
         allBooks,
       }));
+
+      const reading = this.state.allBooks.filter(book => book.shelf.includes('currently'))
+      this.setState({ reading });
+
+      const read = this.state.allBooks.filter(book => book.shelf === 'read')
+      this.setState({ read });
+
+      const wantToRead = this.state.allBooks.filter(book => book.shelf.includes('want'))
+      this.setState({ wantToRead });
     });
   }
 
+  // BooksList () {
+  //   const [books, updateBooks] = React.useState([]);
+    
+ 
+  //       const read = this.state.allBooks.filter(book => book.shelf === 'read')
+  //       updateBooks([...books, { name: read}]);
+  
+  // }
+
+  // const showingContacts = query === ''
+  // ? contacts
+  // : contacts.filter((c) => (
+  //     c.shelf.toLowerCase().includes('query.toLowerCase()')
+  //   ))
+  // const currentlyReading = () => {
+  //   this.setState((currentState) => ({
+  //     read: currentState.contacts.filter((c) => (
+  //       c.readingModes.shelf.toLowerCase().includes('currentlyReading')
+  //     ))
+  //   }))
+  // }
+ 
+  // checkShelf(shelf) {
+  //   return shelf >= 18;
+  // }
   // onAdd = (contact) => {
   //   ContactsAPI.create(contact)
   //     .then((contact) => {
@@ -51,27 +89,69 @@ class BooksApp extends React.Component {
     //   })
   };
 
+  // readBook(e) {
+  //   const read = this.state.allBooks.filter(book => book.shelf === 'read')
+  //   console.log(read);
+  //   if(read) {
+  //     this.setState({
+  //       read: [ ...this.state.read, read],
+  //     }, () => {
+  //       console.log(this.state.read);
+  //     });
+  //   }
+  // }
+
+
+
+
   render() {
+
+    // const read = this.state.allBooks.filter(book => book.shelf === 'read') 
+    // this.setState({
+    //   read: [ ...this.state.read, {
+    //     read
+    //   }],
+    // });
+
+    // const showingContacts = this.state.allBooks.filter((c) => (
+    //   c.readingModes.shelf.toLowerCase().includes('currentlyReading')
+    //   ))
+
+    
+    // const setCurrentlyReading = () => {
+    //   this.setState({ read: read });
+    // };
+
+    //this.state.read = this.state.allBooks.filter(book => book.shelf === 'read') 
+
+    //this.state.read = this.state.allBooks.filter(book => book.shelf === 'read')
+
+    
+    //this.setState.readtest = readtest
+
+  
     return (
+
       <div className='app'>
+
+        console.log(BooksList)
+         {/* {console.log(this.state.allBooks)} */}
         <Header />
         <div className='list-books-content'>
-          {/* <Reading></Reading>
-          <WantToRead /> */}
+          
 
           <div className='list-books-content'>
-            {/* <Reading></Reading>
-          <WantToRead /> */}
-            <Books
-              header='currently reading'
-              wantToRead={this.state.currentlyReading}
-              onAdd={{}}
-            />
+
           </div>
+          <Books
+            header='currently reading'
+            wantToRead={this.state.reading}
+            onAdd={{}}
+          />
 
           <Books
             header='want to read'
-            wantToRead={this.state.allBooks}
+            wantToRead={this.state.wantToRead}
             onAdd={{}}
           />
            <Books
